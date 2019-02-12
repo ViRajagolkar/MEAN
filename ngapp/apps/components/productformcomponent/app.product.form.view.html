@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product Operations</title>
+</head>
+<body>
+    <h2>Product Component</h2>
+
+    <div class="container" [hidden]="!isSaved">
+        <form name="frmProduct" [formGroup]="frmProduct" (submit)="save()">
+             <div class="form-group">
+                <label for="proId">Product Id</label>
+                <input type="text" name="ProductId" class="form-control" 
+                formControlName="ProductId"/>
+            </div>
+            <div *ngIf="frmProduct.controls.ProductId.dirty &&
+                 !frmProduct.controls.ProductId.valid"
+                class="alert alert-danger"
+            >
+            <p *ngIf="frmProduct.controls.ProductId.errors.required">
+                    Product Id is Must
+                  </p>
+                  <p *ngIf="frmProduct.controls.ProductId.errors.pattern">
+                    Product Id Must be numeric
+                  </p>
+                  <p *ngIf="frmProduct.controls.ProductId.errors.minlength">
+                    Product Id Must be min 2 digits in length
+                  </p>
+                  <p *ngIf="frmProduct.controls.ProductId.errors.maxlength">
+                    Product Id Must be max 5 digits in length
+                  </p>
+                </div>
+    
+            <div class="form-group">
+                <label for="proName">Product Name</label>
+                <input type="text" name="ProductName" class="form-control" 
+                 formControlName="ProductName"/>
+            </div>
+            <div *ngIf="frmProduct.controls.ProductName.dirty && !frmProduct.controls.ProductName.valid"
+                class="alert alert-danger">
+                <p *ngIf="frmProduct.controls.ProductName.errors.pattern">
+                        ProductName must start with Uppercase and number not allowed
+                </p>
+            </div>
+    
+            <div class="form-group">
+                <label for="proCat">Product Category</label>
+                <select class="form-control" name="CategoryName"  
+                formControlName="CategoryName">
+                    <option *ngFor="let c of categories" value="{{c}}">{{c}}</option>
+                </select>
+            </div>
+            <div *ngIf="frmProduct.controls.ProductName.dirty && !frmProduct.controls.ProductName.valid"
+                    class="alert alert-danger">
+                <p *ngIf="frmProduct.controls.CategoryName.errors.required">
+                    Category Name is Must
+                </p>
+            </div>
+    
+            <div class="form-group">
+                <label for="proPrice">Product Price</label>
+                <input type="text" name="Price" class="form-control" 
+                formControlName="Price"/>
+            </div>
+            <div *ngIf="frmProduct.controls.Price.dirty && !frmProduct.controls.Price.valid"
+                class="alert alert-danger">
+                <p *ngIf="frmProduct.controls.Price.invalid">Price Must be positive</p>
+            </div>
+            <div class="form-group">
+                <input type="button" class="btn btn-success" value="New" (click)="clear()"/>
+                <input type="submit" [disabled]="!frmProduct.valid" class="btn btn-success" value="Save"/>
+            </div>
+        </form>
+    </div>
+    
+        <div class="container" [hidden]="isSaved">
+            <table class="table table-bordered table-striped"> 
+                <thead>
+                    <tr>
+                        <!-- <td><input type="checkbox"/> -->
+                        <td *ngFor="let c of tableHeaders">{{c}}</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let p of products" (click)="getselectedrow(p)">
+                        <!-- <td><input type="checkbox" [checked]=""/></td> -->
+                        <td *ngFor="let c of tableHeaders">
+                            {{p[c]}}
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td colspan="4">
+                        <input type="button" value="Load Form" (click)="loadForm();" 
+                        class="btn btn-warning"/>
+                    </td>
+                </tfoot>
+            </table>
+        </div> 
+</body>
+</html>

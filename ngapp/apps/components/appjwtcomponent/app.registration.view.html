@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Registration Page</title>
+  </head>
+  <body>
+      <h2>Registration Component</h2>
+    <div class="container" style="color: 'gray'">
+      <div class="form-group">
+        <label for="username">UserName</label>
+        <input type="text" class="form-control" [(ngModel)]="user.UserName" />
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" class="form-control" [(ngModel)]="user.Password" />
+      </div>
+      <div class="form-group">
+        <label for="cmpassword">Confirm Password</label>
+        <input type="password" class="form-control" [(ngModel)]="user.cfmPassword"/>
+      </div>
+      <input type="button" class="btn btn-success" value="SignUp" (click)="SignUp()"/>&nbsp;
+      <input type="button" class="btn btn-danger" value="Cancel" (click)="Cancel()"/>
+    </div>
+  </body>
+</html>
